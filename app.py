@@ -30,7 +30,10 @@ def post_status():
 	state = get_state()
 	new_state = {
 		**state,
-		data["uuid"]: data
+		data["uuid"]: {
+			**data,
+			"public_ip": request.headers["X-Forwarded-For"]
+		}
 	}
 	with open(FILE, "w") as f:
 		json.dump(new_state, fp=f)
