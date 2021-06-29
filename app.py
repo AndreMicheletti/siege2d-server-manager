@@ -19,15 +19,17 @@ def get_status():
 
 @app.route("/status", methods=['POST'])
 def post_status():
-		data = request.json
-		state = get_state()
-		new_state = {
-			**state,
-			data["uuid"]: data
-		}
-		with open(FILE, "w") as f:
-			json.dump(new_state, fp=f)
-		return {"status": "ok"}
+	print(request.headers)
+	print(request.json)
+	data = request.json
+	state = get_state()
+	new_state = {
+		**state,
+		data["uuid"]: data
+	}
+	with open(FILE, "w") as f:
+		json.dump(new_state, fp=f)
+	return {"status": "ok"}
 
 write_state({})
 

@@ -1,2 +1,5 @@
 
 __pycache__/
+
+# Ignore file used to persist info
+data.json
