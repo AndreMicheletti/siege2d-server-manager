@@ -29,5 +29,7 @@ def post_status():
 			json.dump(new_state, fp=f)
 		return {"status": "ok"}
 
+write_state({})
+
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=5000)
