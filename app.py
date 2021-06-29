@@ -17,6 +17,11 @@ def write_state(new_state: dict):
 def get_status():
 		return get_state()
 
+@app.route("/clear", methods=['GET'])
+def get_clear():
+	write_state({})
+	return {"status": "ok", "message": "cleared"}
+
 @app.route("/status", methods=['POST'])
 def post_status():
 	print(request.headers)
