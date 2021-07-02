@@ -1,6 +1,9 @@
 
 # LOCAL DEVELOPMENT
 
+run:
+	FLASK_APP=main.py flask run -p 5000
+
 local:
 	docker run -p 5000:5000 siege2d_matchmaker
 
