@@ -1,7 +1,16 @@
+import os
 from flask import Flask
 from flask_cors import CORS
 
-from kube import get_available_game_servers_ordered
+from src.kube import get_available_game_servers_ordered
+
+DEFAULT_PORT = 10567
+
+LOCAL = os.getenv("LOCAL", None)
+LOCAL_SERVER = {
+	"address": "localhost",
+	"port": DEFAULT_PORT
+}
 
 app = Flask(__name__)
 CORS(app)
@@ -12,6 +21,8 @@ def get_alive():
 
 @app.route("/", methods=['GET'])
 def get_gameserver():
+		if LOCAL:
+			return {"status": "ok", "server": LOCAL_SERVER}
 		servers = get_available_game_servers_ordered()
 		if servers and len(servers) > 0:
 			return {"status": "ok", "server": servers[0]}
